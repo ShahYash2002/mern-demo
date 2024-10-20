@@ -9,7 +9,7 @@ const ProductFetcher = () => {
 
     const fetchProductDetails = async () => {
         try {
-            const response = await axios.post('http://localhost:5000/api/products/fetch-product', { url });
+            const response = await axios.post('https://mern-demo-cwtr.onrender.com/api/products/fetch-product', { url });
             setProduct(response.data);
         } catch (error) {
             console.error('Error fetching product:', error);
