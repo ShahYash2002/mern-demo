@@ -10,9 +10,16 @@ async function fetchFlipkartProduct(url) {
   try {
     browser = await puppeteer.launch({ headless: true });
     const page = await browser.newPage();
+
+    const navigationPromise = page.waitForNavigation();
+
+    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36');
+
     const response = await page.goto(url, {
         waitUntil: "networkidle2",
     });
+
+    await navigationPromise;
 
     if (!response) {
       console.error("response does not exist");
@@ -22,7 +29,7 @@ async function fetchFlipkartProduct(url) {
       return { status: 400, content: "" };
     }
 
-    console.log(response);
+    await page.waitForSelector("span.VU-ZEz");
     
     const title = await page.$eval("span.VU-ZEz", (el) => el.innerText); // Ensure this is the correct class
     const price = await page.$eval("div.Nx9bqj.CxhGGd", (el) =>
