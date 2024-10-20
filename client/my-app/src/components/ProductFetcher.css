@@ -1,0 +1,23 @@
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.product-details h2 {
+    font-weight: 600;
+}
+
+.product-details img {
+    max-height: 300px;
+    object-fit: contain;
+}
+
+.input-group {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+ul.list-group {
+    max-height: 200px;
+    overflow-y: auto;
+}
