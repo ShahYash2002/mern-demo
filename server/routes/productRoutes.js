@@ -22,6 +22,8 @@ async function fetchFlipkartProduct(url) {
       return { status: 400, content: "" };
     }
 
+    console.log(response);
+    
     const title = await page.$eval("span.VU-ZEz", (el) => el.innerText); // Ensure this is the correct class
     const price = await page.$eval("div.Nx9bqj.CxhGGd", (el) =>
       el.innerText.replace("₹", "").replace(",", "")
