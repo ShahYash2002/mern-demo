@@ -10,7 +10,7 @@ async function fetchFlipkartProduct(url) {
     try {
         browser = await puppeteer.launch({ headless: true });
         const page = await browser.newPage();
-        await page.goto(url, { waitUntil: 'networkidle2' });
+        await page.goto(url, { waitUntil: 'networkidle0' });
 
         const title = await page.$eval('span.VU-ZEz', el => el.innerText); // Ensure this is the correct class
         const price = await page.$eval('div.Nx9bqj.CxhGGd', el => el.innerText.replace('₹', '').replace(',', '')); // Ensure this is the correct class
