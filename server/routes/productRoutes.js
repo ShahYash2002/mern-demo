@@ -13,10 +13,12 @@ async function fetchFlipkartProduct(url) {
 
     const navigationPromise = page.waitForNavigation();
 
-    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36');
+    await page.setUserAgent(
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+    );
 
     const response = await page.goto(url, {
-        waitUntil: "networkidle2",
+      waitUntil: "networkidle2",
     });
 
     await navigationPromise;
@@ -30,7 +32,7 @@ async function fetchFlipkartProduct(url) {
     }
 
     await page.waitForSelector("span.VU-ZEz");
-    
+
     const title = await page.$eval("span.VU-ZEz", (el) => el.innerText); // Ensure this is the correct class
     const price = await page.$eval("div.Nx9bqj.CxhGGd", (el) =>
       el.innerText.replace("₹", "").replace(",", "")
@@ -83,6 +85,7 @@ router.post("/fetch-product", async (req, res) => {
         priceHistory: [{ price: productData.price, date: new Date() }],
       });
     } else {
+      product.currentPrice = productData.price;
       product.priceHistory.push({ price: productData.price, date: new Date() });
     }
 
